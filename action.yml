@@ -1,0 +1,41 @@
+# This file defines the metadata, inputs, and execution for your GitHub Action.
+name: '0pirate Security Review'
+description: 'Runs a secure, zero-knowledge AI code review and security analysis using the 0pirate platform.'
+author: '0pirate'
+
+branding:
+  icon: 'shield'
+  color: 'blue'
+
+inputs:
+  github-token:
+    description: 'The GitHub token to post comments on the PR. Usually ${{ secrets.GITHUB_TOKEN }}.'
+    required: true
+  
+  opirate-api-key-name:
+    description: 'The name of your saved 0pirate API key for the selected provider.'
+    required: true
+
+  opirate-provider:
+    description: 'The AI provider to use for the analysis (e.g., gemini, openai, anthropic).'
+    required: false
+    default: 'gemini'
+
+  opirate-model:
+    description: 'The specific model to use for the analysis.'
+    required: false
+    default: 'gemini-1.5-flash'
+  
+  opirate-api-url:
+    description: 'The base URL for the 0pirate API. Override for self-hosted instances.'
+    required: false
+    default: 'https://api.0pirate.com'
+
+  token-budget:
+    description: 'Optional: Maximum token budget for the analysis. The action will fail if this is exceeded.'
+    required: false
+
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+
