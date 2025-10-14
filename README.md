@@ -84,66 +84,7 @@ jobs:
           # opirate-provider: 'openai'
           # opirate-model: 'gpt-4o'
 
-Commit this file to your main branch. You're all set! The 0pirate action will now automatically review every new pull request.
 
-Action Inputs
-All inputs are configured under the with: key in your workflow file.
-
-Input
-
-Description
-
-Required
-
-Default
-
-github-token
-
-The GitHub token for API access, used to post comments back to the PR. Always use ${{ secrets.GITHUB_TOKEN }}.
-
-true
-
-N/A
-
-opirate-api-key-name
-
-The name of the API key you saved in your 0pirate.com account. This is passed via a GitHub secret.
-
-true
-
-N/A
-
-opirate-provider
-
-The AI provider you want to use (e.g., gemini, openai, anthropic). Must match your saved key.
-
-false
-
-gemini
-
-opirate-model
-
-The specific model for the analysis (e.g., gemini-1.5-pro, gpt-4o).
-
-false
-
-gemini-1.5-flash
-
-opirate-api-url
-
-The base URL for the 0pirate API. Only change this for self-hosted or enterprise deployments.
-
-false
-
-https://api.0pirate.com
-
-token-budget
-
-(Coming Soon) The maximum token budget for an analysis. If exceeded, the action will fail.
-
-false
-
-N/A
 
 Happy coding, and may your code be secure! 
 
