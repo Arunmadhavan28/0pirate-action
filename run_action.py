@@ -19,7 +19,7 @@ try:
     # --- Action Inputs ---
     
     # FIX: 'github-token' is a special case passed directly as GITHUB_TOKEN
-    GITHUB_TOKEN = os.environ.get("GITHUB_TOKEN")
+    GITHUB_TOKEN = get_env("repo-token")
     if not GITHUB_TOKEN:
         print(f"::error::Missing required input: github-token")
         raise ValueError("Input 'github-token' is required.")
