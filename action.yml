@@ -7,7 +7,7 @@ branding:
   color: 'blue'
 
 inputs:
-  github-token:
+  repo-token:
     description: 'The GitHub token to post comments on the PR.'
     required: true
   
