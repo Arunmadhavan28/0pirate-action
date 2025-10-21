@@ -9,7 +9,7 @@ branding:
 
 inputs:
   github-token:
-    description: 'The GitHub token to post comments on the PR. Usually ${{ secrets.GITHUB_TOKEN }}.'
+    description: 'The GitHub token to post comments on the PR.'
     required: true
   
   opirate-api-key-name:
