@@ -17,22 +17,30 @@ def get_env(var_name: str, required: bool = True, default: Any = None) -> str:
 
 try:
     # --- Action Inputs ---
-    GITHUB_TOKEN = get_env("github-token")
-    API_KEY_NAME = get_env("0pirate-api-key-name")
-    PROVIDER = get_env("0pirate-provider")
-    MODEL = get_env("0pirate-model")
-    API_URL = get_env("0pirate-api-url").rstrip('/')
-    TOKEN_BUDGET = get_env("token-budget", required=False) # For future use
+    
+    # FIX: 'github-token' is a special case passed directly as GITHUB_TOKEN
+    GITHUB_TOKEN = os.environ.get("GITHUB_TOKEN")
+    if not GITHUB_TOKEN:
+        print(f"::error::Missing required input: github-token")
+        raise ValueError("Input 'github-token' is required.")
+    
+    # All other inputs are read normally using your helper
+    ACTION_TOKEN = get_env("opirate-action-token")
+    API_KEY_NAME = get_env("opirate-api-key-name")
+    PROVIDER = get_env("opirate-provider")
+    MODEL = get_env("opirate-model")
+    API_URL = get_env("opirate-api-url").rstrip('/')
+    TOKEN_BUDGET = get_env("token-budget", required=False)
+    ALLOW_LIST = get_env("allow-list", required=False)
 
     # --- GitHub Actions Context ---
-    # These are read directly, not as inputs
     GITHUB_EVENT_PATH = os.environ.get("GITHUB_EVENT_PATH")
     if not GITHUB_EVENT_PATH:
         raise ValueError("GITHUB_EVENT_PATH not found in environment.")
 
 except ValueError:
-    # Exit with a non-zero code to fail the action step
     raise SystemExit(1)
+
 
 
 # --- API & GitHub Interaction ---
