@@ -54,17 +54,17 @@ def generate_diff(original_content: str, new_content: str) -> str:
 # --- Configuration & Secure Environment Handling ---
 
 def get_env(var_name: str, required: bool = True, default: Any = None) -> str:
-    """
-    Securely retrieves an environment variable set by the GitHub Actions runner.
-    """
-    # --- FIX: Removed .replace('-', '_') to match the variable name exactly ---
-    env_var_name = f"INPUT_{var_name.upper()}"
-    value = os.environ.get(env_var_name)
-    
-    if required and not value:
-        print(f"::error::Missing required input: {var_name}")
-        raise ValueError(f"Input '{var_name}' is required.")
-    return value or default
+    """
+    Securely retrieves an environment variable set by the GitHub Actions runner.
+    """
+    # FIX: Do not replace hyphens.
+    env_var_name = f"INPUT_{var_name.upper()}"
+    value = os.environ.get(env_var_name)
+    
+    if required and not value:
+        print(f"::error::Missing required input: {var_name}")
+        raise ValueError(f"Input '{var_name}' is required.")
+    return value or default
 
 def estimate_tokens(text: str) -> int:
     """Provides a rough, safe estimate of the token count."""
