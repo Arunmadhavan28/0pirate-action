@@ -208,6 +208,8 @@ def main():
         
         opirate_headers = {"X-0Pirate-Action-Token": ACTION_TOKEN}
 
+        print(f"Authenticating with token ending in: ...{ACTION_TOKEN[-4:]}")
+
         main_res = requests.post(f"{API_URL}/api/process_code", data=main_form_data, files=main_files_data, headers=opirate_headers)
         if not main_res.ok:
             print(f"::error::Job submission failed: {main_res.status_code} {main_res.text}")
