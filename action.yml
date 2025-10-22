@@ -35,11 +35,11 @@ inputs:
     default: 'https://api.0pirate.com'
 
   allow-list:
-    description: 'A comma-separated list of identifiers (e.g., function names) to exclude from abstraction.'
+    description: 'A comma-separated list of identifiers to exclude from abstraction.'
     required: false
 
   token-budget:
-    description: 'Optional: Maximum token budget for the analysis. The action will fail if this is exceeded.'
+    description: 'Optional: Maximum token budget for the analysis.'
     required: false
 
 runs:
