@@ -202,9 +202,18 @@ def main():
             "token_saver_enabled": "True",
         }
         
-        abstracted_content_string = "".join(sorted([v for v in abstracted_files.values() if v]))
-        main_form_data["tamper_evident_hash"] = hashlib.sha256(abstracted_content_string.encode()).hexdigest()
-        main_files_data = [('files', (name, content, 'text/plain')) for name, content in abstracted_files.items()]
+        # [THIS IS THE NEW, CORRECTED CODE]
+        # 1. Get the sorted filenames (this matches the server logic)
+        sorted_filenames = sorted(abstracted_files.keys())
+        
+        # 2. Build the content string by iterating over the sorted filenames
+        abstracted_content_string = ""
+        for filename in sorted_filenames:
+            abstracted_content_string += abstracted_files.get(filename, "")
+
+        # 3. Hash the correctly ordered string
+        main_form_data["tamper_evident_hash"] = hashlib.sha256(abstracted_content_string.encode()).hexdigest()
+        main_files_data = [('files', (name, content, 'text/plain')) for name, content in abstracted_files.items()]
         
         opirate_headers = {"X-0Pirate-Action-Token": ACTION_TOKEN}
 
